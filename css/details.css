@@ -1,0 +1,143 @@
+body {
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: bold;
+    margin-top: 100px;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.character {
+    position: relative;
+    width: 500px;
+    height: 790px;
+    border: 3px solid #000;
+    overflow: hidden;
+    filter: url('#rough');
+    margin: 50px;
+}
+
+.character div {
+    position: absolute;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.head {
+    top: 10%;
+    height: 20%;
+    z-index: 3;
+    background-color: transparent;
+}
+
+.facialExpression {
+    top: 20%;
+    height: 25%;
+    z-index: 2;
+    background-color: transparent;
+}
+
+.clothing {
+    top: 40%;
+    height: 50%;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.options {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    margin: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.option {
+    margin: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 150px;
+    border: 3px solid black;
+    filter: url('#rough');
+}
+
+.option.selected {
+    transform: scale(1.1);
+    border: 5px solid black;
+}
+
+.option img {
+    width: 100px;
+    height: auto;
+}
+
+.option:hover {
+    background-color: #eee;
+}
+
+nav ul {
+    list-style: none;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+    font-size: 28px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    margin: 10px;
+    text-align: center;
+}
+
+button {
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: bold;
+    width: 200px;
+    height: 70px;
+    font-size: 28px;
+    margin-top: 20px;
+    border-bottom: 3px solid black;
+    filter: url('#rough');
+}
+
+nav {
+    background-color: rgb(255, 255, 255);
+    color: #fff;
+    padding: 20px 0;
+    position: fixed;
+    top: -5px;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 3px solid black;
+    filter: url('#rough');
+}

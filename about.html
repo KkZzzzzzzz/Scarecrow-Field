@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/about.css">
+    <title>Scarecrow Field</title>
+</head>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="height:0; position:absolute;">
+    <defs>
+        <filter id="rough">
+            <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" />
+        </filter>
+    </defs>
+</svg>
+
+<body>
+    <nav>
+        <ul>
+            <li><img src="./images/logo.png" alt="Logo" height="40"></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="details.html">Create Your Own</a></li>
+        </ul>
+    </nav>
+    <h1>About</h1>
+    <h2>
+        Welcome to my Scarecrow Field! Dive into a world where you create your very own scarecrow to help me guard my field. Here’s how to get started:
+    </h2>
+
+    <h2>
+        Design Your Scarecrow: Click on “Build Your Own” to design a scarecrow.
+    </h2>
+
+    <h2>
+        Deploy Your Creation: Once you’re satisfied with your design, hit “Confirm,” then click anywhere in the field to place your scarecrow and watch it come to life!
+    </h2>
+</body>
+</html>
