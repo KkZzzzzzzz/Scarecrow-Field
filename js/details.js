@@ -33,6 +33,8 @@ function saveCharacterDesign() {
         clothing: document.getElementById('clothing').style.backgroundImage
     };
 
+    console.log("Character to save:", character);
+
     fetch('https://scarecrow-field-e6y6g3pps-kellys-projects-9ea9f4ea.vercel.app/saveCharacter', {
         method: 'POST',
         headers: {
@@ -40,9 +42,15 @@ function saveCharacterDesign() {
         },
         body: JSON.stringify(character)
     }).then(response => {
+        console.log("Response status:", response.status);
         if (response.ok) {
+            console.log("Character saved successfully");
             window.location.href = 'index.html';
+        } else {
+            console.error("Failed to save character");
         }
+    }).catch(error => {
+        console.error("Error:", error);
     });
 }
 
