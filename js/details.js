@@ -4,52 +4,47 @@ let selections = {
     clothing: false
 };
 
-// change the object displays on the left accoording to the selection
 function changeHat(hat) {
     document.getElementById('head').style.backgroundImage = `url(${hat})`;
-    sessionStorage.setItem('selectedHat', hat);
     selections.hat = true;
     checkSelections();
 }
 
-// change the object displays on the left accoording to the selection
 function changeFacialExpression(expression) {
     document.getElementById('facialExpression').style.backgroundImage = `url(${expression})`;
-    sessionStorage.setItem('selectedExpression', expression);
     selections.expression = true;
     checkSelections();
 }
 
-// change the object displays on the left accoording to the selection
 function changeClothing(clothing) {
     document.getElementById('clothing').style.backgroundImage = `url(${clothing})`;
-    sessionStorage.setItem('selectedClothing', clothing);
     selections.clothing = true;
     checkSelections();
 }
 
-// only enable the confirm button if a hat, a face and a clothing is selected
 function checkSelections() {
     document.getElementById('confirmButton').disabled = !(selections.hat && selections.expression && selections.clothing);
 }
 
-//save the scarecrow character to sessionstorage
 function saveCharacterDesign() {
-    const selectedHat = sessionStorage.getItem('selectedHat');
-    const selectedExpression = sessionStorage.getItem('selectedExpression');
-    const selectedClothing = sessionStorage.getItem('selectedClothing');
+    const character = {
+        hat: document.getElementById('head').style.backgroundImage,
+        expression: document.getElementById('facialExpression').style.backgroundImage,
+        clothing: document.getElementById('clothing').style.backgroundImage
+    };
 
-    if (selectedHat && selectedExpression && selectedClothing) {
-        sessionStorage.setItem('confirmedCharacter', JSON.stringify({
-            hat: selectedHat,
-            expression: selectedExpression,
-            clothing: selectedClothing
-        }));
-    
-        window.location.href = 'index.html';
-    } 
+    fetch('https://scarecrow-field-e6y6g3pps-kellys-projects-9ea9f4ea.vercel.app/saveCharacter', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(character)
+    }).then(response => {
+        if (response.ok) {
+            window.location.href = 'index.html';
+        }
+    });
 }
-
 
 document.querySelectorAll('.option').forEach(option => {
     option.addEventListener('click', function() {

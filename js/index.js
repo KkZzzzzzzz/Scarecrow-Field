@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const g = canvas.getContext('2d');
 
     function drawGrass() {
-        for (let i = 0; i < 1000000; i++) {
+        for (let i = 0; 1000000; i++) {
             let x = Math.random() * canvas.width;
             let y = Math.random() * canvas.height;
             let height = Math.random() * 20 + 10;
@@ -23,34 +23,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    //draw grass
     drawGrass();
 
-    // draw scarecrow characters from the list
-    const savedCharacters = JSON.parse(sessionStorage.getItem('characters') || '[]');
-    if (savedCharacters.length > 0) {
-        savedCharacters.forEach(character => {
-            displayCharacterNoAnimation(character);
+    fetch('https://scarecrow-field-e6y6g3pps-kellys-projects-9ea9f4ea.vercel.app/getCharacters')
+        .then(response => response.json())
+        .then(savedCharacters => {
+            if (savedCharacters.length > 0) {
+                savedCharacters.forEach(character => {
+                    displayCharacterNoAnimation(character);
+                });
+            }
         });
-    }
 
     let isDragging = false;
     let hasMoved = false;
     let startX, startY;
+    let characterPlaced = false; // Flag to track if the character has been placed
 
-    //track mouse down
     imageWrapper.addEventListener('mousedown', function(event) {
         isDragging = true;
         startX = event.clientX;
         startY = event.clientY;
         event.preventDefault();
-
-
-
-        
     });
 
-    //track mouse move, move == dragging, no character is placed
     document.addEventListener('mousemove', function(event) {
         if (isDragging) {
             hasMoved = true;
@@ -64,9 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    //mouseup no dragging, place a scarecrow
     document.addEventListener('mouseup', function(event) {
-        if (!hasMoved) {
+        if (!hasMoved && !characterPlaced) {
             placeScarecrow(event);
         }
         isDragging = false;
@@ -82,21 +77,28 @@ document.addEventListener('DOMContentLoaded', function() {
         imageWrapper.style.top = newTop + 'px';
     }
 
-    //get the scarecrow from list and place it 
     function placeScarecrow(event) {
-        const confirmedCharacter = JSON.parse(sessionStorage.getItem('confirmedCharacter') || 'null');
-        if (confirmedCharacter) {
-            const { offsetX, offsetY } = event;
-            const characterData = { ...confirmedCharacter, x: offsetX - 125, y: offsetY - 187.5 };
-            displayCharacter(characterData);
-            const characters = JSON.parse(sessionStorage.getItem('characters') || '[]');
-            characters.push(characterData);
-            sessionStorage.setItem('characters', JSON.stringify(characters));
-            sessionStorage.setItem('confirmedCharacter', 'null');
-        }
+        fetch('https://scarecrow-field-e6y6g3pps-kellys-projects-9ea9f4ea.vercel.app/getCharacter')
+            .then(response => response.json())
+            .then(confirmedCharacter => {
+                if (confirmedCharacter) {
+                    const { offsetX, offsetY } = event;
+                    const characterData = { ...confirmedCharacter, x: offsetX - 125, y: offsetY - 187.5 };
+                    displayCharacter(characterData);
+
+                    fetch('https://scarecrow-field-e6y6g3pps-kellys-projects-9ea9f4ea.vercel.app/saveCharacters', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(characterData)
+                    });
+
+                    characterPlaced = true; // Set the flag to indicate the character has been placed
+                }
+            });
     }
 
-    //this is only for displaying the scarecrows that are already there
     function displayCharacterNoAnimation({ hat, clothing, expression, x, y }) {
         const characterContainer = document.createElement('div');
         characterContainer.className = 'character';
@@ -122,7 +124,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('draggableCanvas').appendChild(characterContainer);
     }
 
-    //this is for displaying the new scarecrow
     function displayCharacter({ hat, clothing, expression, x, y }) {
         const characterContainer = document.createElement('div');
         characterContainer.className = 'character';
@@ -160,12 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
             delay: 0
         });
     }
-
 });
 
 window.addEventListener('resize', function() {
     adjustWrapperPosition();
 });
-
-
-
