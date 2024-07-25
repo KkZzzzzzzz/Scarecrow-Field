@@ -35,7 +35,7 @@ function saveCharacterDesign() {
 
     console.log("Character to save:", character);
 
-    fetch('https://character-design-6vs2c7pqt-kellys-projects-9ea9f4ea.vercel.app/saveCharacter', {
+    fetch('https://character-design-31j8tlpa3-kellys-projects-9ea9f4ea.vercel.app/saveCharacter', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
