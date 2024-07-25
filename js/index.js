@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     drawGrass();
 
-    fetch('https://character-design-31j8tlpa3-kellys-projects-9ea9f4ea.vercel.app/getCharacters')
+    fetch('https://character-design-6vs2c7pqt-kellys-projects-9ea9f4ea.vercel.app/getCharacters')
         .then(response => response.json())
         .then(savedCharacters => {
             if (savedCharacters.length > 0) {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function placeScarecrow(event) {
-        fetch('https://character-design-31j8tlpa3-kellys-projects-9ea9f4ea.vercel.app/getCharacter')
+        fetch('https://character-design-6vs2c7pqt-kellys-projects-9ea9f4ea.vercel.app/getCharacter')
             .then(response => response.json())
             .then(confirmedCharacter => {
                 if (confirmedCharacter) {
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const characterData = { ...confirmedCharacter, x: offsetX - 125, y: offsetY - 187.5 };
                     displayCharacter(characterData);
 
-                    fetch('https://character-design-31j8tlpa3-kellys-projects-9ea9f4ea.vercel.app/saveCharacters', {
+                    fetch('https://character-design-6vs2c7pqt-kellys-projects-9ea9f4ea.vercel.app/saveCharacters', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
