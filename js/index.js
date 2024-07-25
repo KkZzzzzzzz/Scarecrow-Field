@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const g = canvas.getContext('2d');
 
     function drawGrass() {
-        for (let i = 0; 1000000; i++) {
+        for (let i = 0; i < 1000000; i++) {
             let x = Math.random() * canvas.width;
             let y = Math.random() * canvas.height;
             let height = Math.random() * 20 + 10;
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     drawGrass();
 
-    fetch('https://scarecrow-field-e6y6g3pps-kellys-projects-9ea9f4ea.vercel.app/getCharacters')
+    fetch('https://character-design-31j8tlpa3-kellys-projects-9ea9f4ea.vercel.app/getCharacters')
         .then(response => response.json())
         .then(savedCharacters => {
             if (savedCharacters.length > 0) {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function placeScarecrow(event) {
-        fetch('https://scarecrow-field-e6y6g3pps-kellys-projects-9ea9f4ea.vercel.app/getCharacter')
+        fetch('https://character-design-31j8tlpa3-kellys-projects-9ea9f4ea.vercel.app/getCharacter')
             .then(response => response.json())
             .then(confirmedCharacter => {
                 if (confirmedCharacter) {
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const characterData = { ...confirmedCharacter, x: offsetX - 125, y: offsetY - 187.5 };
                     displayCharacter(characterData);
 
-                    fetch('https://scarecrow-field-e6y6g3pps-kellys-projects-9ea9f4ea.vercel.app/saveCharacters', {
+                    fetch('https://character-design-31j8tlpa3-kellys-projects-9ea9f4ea.vercel.app/saveCharacters', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
