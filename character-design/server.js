@@ -5,8 +5,16 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json());
+
+// Explicitly handle CORS
+const corsOptions = {
+    origin: 'https://scarecrow-field-e6y6g3pps-kellys-projects-9ea9f4ea.vercel.app',
+    methods: 'GET,POST',
+    allowedHeaders: 'Content-Type'
+};
+
+app.use(cors(corsOptions));
 
 let characterDesign = {
     hat: null,
