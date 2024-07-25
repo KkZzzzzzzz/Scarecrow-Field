@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors()); // Use this to handle CORS
 
 let characterDesign = {
     hat: null,
@@ -46,7 +46,7 @@ app.post('/reset', (req, res) => {
         clothing: null
     };
     characters = [];
-    console.log('All data has been reset.'); // Add log to confirm reset
+    console.log('All data has been reset.'); // Log to confirm reset
     res.sendStatus(200);
 });
 
